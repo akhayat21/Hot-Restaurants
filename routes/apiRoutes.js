@@ -1,10 +1,13 @@
-var express = require("express");
-var path = require("path");
+var tables = require("data/tableData.js");
+var waitlist = require("data/waitingList.js")
 
-var app = express();
-var PORT = process.env.PORT || 3000;
+
+
 
 //Display all Tables
+app.get("/api/waitlist", function(req, res) {
+    return res.json(waitlist)
+})
 app.get("/api/tables", function(req, res) {
     return res.json(tables)
 })
@@ -23,6 +26,23 @@ app.get("/api/tables/:tables;", function(req,res) {
     
       return res.json(false);
 });
+
+app.get("/api/tables/:waitlist"), function(req, res) {
+  var reservation = req.params.waitlist;
+
+  console.log(reservation);
+
+  for (var i = 0; i < waitlist.length; i++) {
+    if (reservation === waitlist[i].routeName) {
+      return res.json(waitlist[i]);
+    }
+  }
+
+  return res.json(false);
+}
+
+
+
 
 app.post("/api/tables", function(req, res) {
     var newReservation = req.body;

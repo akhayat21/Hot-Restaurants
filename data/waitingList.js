@@ -1,3 +1,5 @@
+module.exports = waitingList
+
 var waitingList = [
     {
         name: "",
